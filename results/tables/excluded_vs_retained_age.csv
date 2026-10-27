@@ -1,0 +1,5 @@
+"group","n","mean_age","wilcox_p_vs_retained"
+"retained",513,53.75,NA
+"excluded_all",34,70.55,1.19e-07
+"excluded_tract_outlier",22,70.45,2.31e-05
+"excluded_dwi_incomplete",9,71.9,0.0021

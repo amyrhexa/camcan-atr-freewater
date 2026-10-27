@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite this repository. For the associated scientific findings, cite the manuscript separately when a formal publication reference is available."
+title: "Cam-CAN ATR Free-Water Analysis"
+authors:
+  - family-names: Mahmoudi
+    given-names: AmirHossein
+license: MIT
+repository-code: "https://github.com/amyrhexa/camcan-atr-freewater"
+keywords:
+  - Cam-CAN
+  - white-matter microstructure
+  - free-water elimination
+  - anterior thalamic radiation
+  - processing speed
+  - fluid intelligence
+  - structural equation modelling

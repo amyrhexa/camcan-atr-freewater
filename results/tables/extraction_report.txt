@@ -1,0 +1,733 @@
+================================================================================
+DATA EXTRACTION AND MERGE PIPELINE AUDIT REPORT
+================================================================================
+Execution Timestamp : 2026-10-15 11:29:58
+Configuration File  : /home/amyr/Projects/Cam-CAN/EXTRACT/watershed_config.yml
+Pipeline Status     : SUCCESS
+Output CSV Path     : /home/amyr/Projects/Cam-CAN/EXTRACT/output/camcan_watershed_dataset.csv
+Report Output Path  : /home/amyr/Projects/Cam-CAN/EXTRACT/output/extraction_report.txt
+--------------------------------------------------------------------------------
+CONFIGURATION SUMMARY
+--------------------------------------------------------------------------------
+Input Root Directory       : /home/amyr/Projects/Cam-CAN/DATA
+Output Directory           : output
+Subject Identifier Column  : id
+Merge Strategy             : inner
+Duplicate ID Policy        : keep_first
+Duplicate Variable Policy  : error
+Missing Variable Policy    : error
+Complete Cases Only        : False
+Participant Filter File    : None
+--------------------------------------------------------------------------------
+INPUT SOURCES AUDIT
+--------------------------------------------------------------------------------
+Source: participants
+  File Path         : /home/amyr/Projects/Cam-CAN/DATA/demo/participants.csv
+  Detected ID Col   : id
+  Unique Subjects   : 653
+  Variables Selected: 4 -> ['age', 'sex', 'handedness', 'years_education']
+
+Source: demography
+  File Path         : /home/amyr/Projects/Cam-CAN/DATA/demo/demography.csv
+  Detected ID Col   : id
+  Unique Subjects   : 2681
+  Variables Selected: 17 -> ['additional_acer', 'additional_alcohol', 'additional_attention_orientation', 'additional_fluencies', 'additional_HADS_anx_category', 'additional_HADS_anxiety', 'additional_HADS_dep_category', 'additional_HADS_depression', 'additional_hours_in_bed', 'additional_hours_slept', 'additional_language', 'additional_memory', 'additional_psqi', 'additional_qual', 'additional_sleep_efficiency', 'additional_smoker', 'additional_visuospatial']
+
+Source: cattell
+  File Path         : /home/amyr/Projects/Cam-CAN/DATA/scored/Cattell.csv
+  Detected ID Col   : id
+  Unique Subjects   : 660
+  Variables Selected: 5 -> ['cattell_SubScore1', 'cattell_SubScore2', 'cattell_SubScore3', 'cattell_SubScore4', 'cattell_TotalScore']
+
+Source: rt_simple
+  File Path         : /home/amyr/Projects/Cam-CAN/DATA/scored/RTsimple.csv
+  Detected ID Col   : id
+  Unique Subjects   : 2374
+  Variables Selected: 8 -> ['rt_simple_Include_participant', 'rt_simple_RTmean', 'rt_simple_RTsd', 'rt_simple_RTcv', 'rt_simple_invRTmean', 'rt_simple_invRTsd', 'rt_simple_RTtrim3mean', 'rt_simple_RTtrim3sd']
+
+Source: rt_choice
+  File Path         : /home/amyr/Projects/Cam-CAN/DATA/scored/RTchoice.csv
+  Detected ID Col   : id
+  Unique Subjects   : 2327
+  Variables Selected: 8 -> ['rt_choice_Include_participant', 'rt_choice_RTmean_all', 'rt_choice_RTsd_all', 'rt_choice_RTcv_all', 'rt_choice_invRTmean_all', 'rt_choice_invRTsd_all', 'rt_choice_RTtrim3mean_all', 'rt_choice_RTtrim3sd_all']
+
+Source: mri_behavioral
+  File Path         : /home/amyr/Projects/Cam-CAN/DATA/scored/MRI.csv
+  Detected ID Col   : id
+  Unique Subjects   : 638
+  Variables Selected: 8 -> ['mri_behav_include_participant', 'mri_behav_mRT', 'mri_behav_stdRT', 'mri_behav_cvRT', 'mri_behav_mRT_inv', 'mri_behav_stdRT_inv', 'mri_behav_mRT_trim', 'mri_behav_stdRT_trim']
+
+Source: jhu_wmti_awf
+  File Path         : /home/amyr/Projects/Cam-CAN/DATA/dwi/JHU_atlas/roi/wmti_awf.csv
+  Detected ID Col   : id
+  Unique Subjects   : 635
+  Variables Selected: 50 -> ['jhu_wmti_awf_Middle cerebellar peduncle', 'jhu_wmti_awf_Pontine crossing tract', 'jhu_wmti_awf_Genu of corpus callosum', 'jhu_wmti_awf_Body of corpus callosum', 'jhu_wmti_awf_Splenium of corpus callosum', 'jhu_wmti_awf_Fornix (body/column)', 'jhu_wmti_awf_Corticospinal tract R', 'jhu_wmti_awf_Corticospinal tract L', 'jhu_wmti_awf_Medial lemniscus R', 'jhu_wmti_awf_Medial lemniscus L', 'jhu_wmti_awf_Inferior cerebellar peduncle R', 'jhu_wmti_awf_Inferior cerebellar peduncle L', 'jhu_wmti_awf_Superior cerebellar peduncle R', 'jhu_wmti_awf_Superior cerebellar peduncle L', 'jhu_wmti_awf_Cerebral peduncle R', 'jhu_wmti_awf_Cerebral peduncle L', 'jhu_wmti_awf_Anterior limb of internal capsule R', 'jhu_wmti_awf_Anterior limb of internal capsule L', 'jhu_wmti_awf_Posterior limb of internal capsule R', 'jhu_wmti_awf_Posterior limb of internal capsule L', 'jhu_wmti_awf_Retrolenticular internal capsule R', 'jhu_wmti_awf_Retrolenticular internal capsule L', 'jhu_wmti_awf_Anterior corona radiata R', 'jhu_wmti_awf_Anterior corona radiata L', 'jhu_wmti_awf_Superior corona radiata R', 'jhu_wmti_awf_Superior corona radiata L', 'jhu_wmti_awf_Posterior corona radiata R', 'jhu_wmti_awf_Posterior corona radiata L', 'jhu_wmti_awf_Posterior thalamic radiation R', 'jhu_wmti_awf_Posterior thalamic radiation L', 'jhu_wmti_awf_Sagittal stratum R', 'jhu_wmti_awf_Sagittal stratum L', 'jhu_wmti_awf_External capsule R', 'jhu_wmti_awf_External capsule L', 'jhu_wmti_awf_Cingulate cingulum R', 'jhu_wmti_awf_Cingulate cingulum L', 'jhu_wmti_awf_Hippocampal cingulum R', 'jhu_wmti_awf_Hippocampal cingulum L', 'jhu_wmti_awf_Fornix crus / stria terminalis R', 'jhu_wmti_awf_Fornix crus / stria terminalis L', 'jhu_wmti_awf_Superior longitudinal fasciculus R', 'jhu_wmti_awf_Superior longitudinal fasciculus L', 'jhu_wmti_awf_Superior fronto-occipital fasciculus R', 'jhu_wmti_awf_Superior fronto-occipital fasciculus L', 'jhu_wmti_awf_Inferior fronto-occipital fasciculus R', 'jhu_wmti_awf_Inferior fronto-occipital fasciculus L', 'jhu_wmti_awf_Uncinate fasciculus R', 'jhu_wmti_awf_Uncinate fasciculus L', 'jhu_wmti_awf_Tapetum R', 'jhu_wmti_awf_Tapetum L']
+
+Source: jhu_fwe_fa
+  File Path         : /home/amyr/Projects/Cam-CAN/DATA/dwi/JHU_atlas/roi/fwe_fa.csv
+  Detected ID Col   : id
+  Unique Subjects   : 635
+  Variables Selected: 50 -> ['jhu_fwe_fa_Middle cerebellar peduncle', 'jhu_fwe_fa_Pontine crossing tract', 'jhu_fwe_fa_Genu of corpus callosum', 'jhu_fwe_fa_Body of corpus callosum', 'jhu_fwe_fa_Splenium of corpus callosum', 'jhu_fwe_fa_Fornix (body/column)', 'jhu_fwe_fa_Corticospinal tract R', 'jhu_fwe_fa_Corticospinal tract L', 'jhu_fwe_fa_Medial lemniscus R', 'jhu_fwe_fa_Medial lemniscus L', 'jhu_fwe_fa_Inferior cerebellar peduncle R', 'jhu_fwe_fa_Inferior cerebellar peduncle L', 'jhu_fwe_fa_Superior cerebellar peduncle R', 'jhu_fwe_fa_Superior cerebellar peduncle L', 'jhu_fwe_fa_Cerebral peduncle R', 'jhu_fwe_fa_Cerebral peduncle L', 'jhu_fwe_fa_Anterior limb of internal capsule R', 'jhu_fwe_fa_Anterior limb of internal capsule L', 'jhu_fwe_fa_Posterior limb of internal capsule R', 'jhu_fwe_fa_Posterior limb of internal capsule L', 'jhu_fwe_fa_Retrolenticular internal capsule R', 'jhu_fwe_fa_Retrolenticular internal capsule L', 'jhu_fwe_fa_Anterior corona radiata R', 'jhu_fwe_fa_Anterior corona radiata L', 'jhu_fwe_fa_Superior corona radiata R', 'jhu_fwe_fa_Superior corona radiata L', 'jhu_fwe_fa_Posterior corona radiata R', 'jhu_fwe_fa_Posterior corona radiata L', 'jhu_fwe_fa_Posterior thalamic radiation R', 'jhu_fwe_fa_Posterior thalamic radiation L', 'jhu_fwe_fa_Sagittal stratum R', 'jhu_fwe_fa_Sagittal stratum L', 'jhu_fwe_fa_External capsule R', 'jhu_fwe_fa_External capsule L', 'jhu_fwe_fa_Cingulate cingulum R', 'jhu_fwe_fa_Cingulate cingulum L', 'jhu_fwe_fa_Hippocampal cingulum R', 'jhu_fwe_fa_Hippocampal cingulum L', 'jhu_fwe_fa_Fornix crus / stria terminalis R', 'jhu_fwe_fa_Fornix crus / stria terminalis L', 'jhu_fwe_fa_Superior longitudinal fasciculus R', 'jhu_fwe_fa_Superior longitudinal fasciculus L', 'jhu_fwe_fa_Superior fronto-occipital fasciculus R', 'jhu_fwe_fa_Superior fronto-occipital fasciculus L', 'jhu_fwe_fa_Inferior fronto-occipital fasciculus R', 'jhu_fwe_fa_Inferior fronto-occipital fasciculus L', 'jhu_fwe_fa_Uncinate fasciculus R', 'jhu_fwe_fa_Uncinate fasciculus L', 'jhu_fwe_fa_Tapetum R', 'jhu_fwe_fa_Tapetum L']
+
+Source: jhu_fwe_fraction
+  File Path         : /home/amyr/Projects/Cam-CAN/DATA/dwi/JHU_atlas/roi/fwe_fraction.csv
+  Detected ID Col   : id
+  Unique Subjects   : 635
+  Variables Selected: 50 -> ['jhu_fwe_frac_Middle cerebellar peduncle', 'jhu_fwe_frac_Pontine crossing tract', 'jhu_fwe_frac_Genu of corpus callosum', 'jhu_fwe_frac_Body of corpus callosum', 'jhu_fwe_frac_Splenium of corpus callosum', 'jhu_fwe_frac_Fornix (body/column)', 'jhu_fwe_frac_Corticospinal tract R', 'jhu_fwe_frac_Corticospinal tract L', 'jhu_fwe_frac_Medial lemniscus R', 'jhu_fwe_frac_Medial lemniscus L', 'jhu_fwe_frac_Inferior cerebellar peduncle R', 'jhu_fwe_frac_Inferior cerebellar peduncle L', 'jhu_fwe_frac_Superior cerebellar peduncle R', 'jhu_fwe_frac_Superior cerebellar peduncle L', 'jhu_fwe_frac_Cerebral peduncle R', 'jhu_fwe_frac_Cerebral peduncle L', 'jhu_fwe_frac_Anterior limb of internal capsule R', 'jhu_fwe_frac_Anterior limb of internal capsule L', 'jhu_fwe_frac_Posterior limb of internal capsule R', 'jhu_fwe_frac_Posterior limb of internal capsule L', 'jhu_fwe_frac_Retrolenticular internal capsule R', 'jhu_fwe_frac_Retrolenticular internal capsule L', 'jhu_fwe_frac_Anterior corona radiata R', 'jhu_fwe_frac_Anterior corona radiata L', 'jhu_fwe_frac_Superior corona radiata R', 'jhu_fwe_frac_Superior corona radiata L', 'jhu_fwe_frac_Posterior corona radiata R', 'jhu_fwe_frac_Posterior corona radiata L', 'jhu_fwe_frac_Posterior thalamic radiation R', 'jhu_fwe_frac_Posterior thalamic radiation L', 'jhu_fwe_frac_Sagittal stratum R', 'jhu_fwe_frac_Sagittal stratum L', 'jhu_fwe_frac_External capsule R', 'jhu_fwe_frac_External capsule L', 'jhu_fwe_frac_Cingulate cingulum R', 'jhu_fwe_frac_Cingulate cingulum L', 'jhu_fwe_frac_Hippocampal cingulum R', 'jhu_fwe_frac_Hippocampal cingulum L', 'jhu_fwe_frac_Fornix crus / stria terminalis R', 'jhu_fwe_frac_Fornix crus / stria terminalis L', 'jhu_fwe_frac_Superior longitudinal fasciculus R', 'jhu_fwe_frac_Superior longitudinal fasciculus L', 'jhu_fwe_frac_Superior fronto-occipital fasciculus R', 'jhu_fwe_frac_Superior fronto-occipital fasciculus L', 'jhu_fwe_frac_Inferior fronto-occipital fasciculus R', 'jhu_fwe_frac_Inferior fronto-occipital fasciculus L', 'jhu_fwe_frac_Uncinate fasciculus R', 'jhu_fwe_frac_Uncinate fasciculus L', 'jhu_fwe_frac_Tapetum R', 'jhu_fwe_frac_Tapetum L']
+
+Source: jhu_fwe_md
+  File Path         : /home/amyr/Projects/Cam-CAN/DATA/dwi/JHU_atlas/roi/fwe_md.csv
+  Detected ID Col   : id
+  Unique Subjects   : 635
+  Variables Selected: 50 -> ['jhu_fwe_md_Middle cerebellar peduncle', 'jhu_fwe_md_Pontine crossing tract', 'jhu_fwe_md_Genu of corpus callosum', 'jhu_fwe_md_Body of corpus callosum', 'jhu_fwe_md_Splenium of corpus callosum', 'jhu_fwe_md_Fornix (body/column)', 'jhu_fwe_md_Corticospinal tract R', 'jhu_fwe_md_Corticospinal tract L', 'jhu_fwe_md_Medial lemniscus R', 'jhu_fwe_md_Medial lemniscus L', 'jhu_fwe_md_Inferior cerebellar peduncle R', 'jhu_fwe_md_Inferior cerebellar peduncle L', 'jhu_fwe_md_Superior cerebellar peduncle R', 'jhu_fwe_md_Superior cerebellar peduncle L', 'jhu_fwe_md_Cerebral peduncle R', 'jhu_fwe_md_Cerebral peduncle L', 'jhu_fwe_md_Anterior limb of internal capsule R', 'jhu_fwe_md_Anterior limb of internal capsule L', 'jhu_fwe_md_Posterior limb of internal capsule R', 'jhu_fwe_md_Posterior limb of internal capsule L', 'jhu_fwe_md_Retrolenticular internal capsule R', 'jhu_fwe_md_Retrolenticular internal capsule L', 'jhu_fwe_md_Anterior corona radiata R', 'jhu_fwe_md_Anterior corona radiata L', 'jhu_fwe_md_Superior corona radiata R', 'jhu_fwe_md_Superior corona radiata L', 'jhu_fwe_md_Posterior corona radiata R', 'jhu_fwe_md_Posterior corona radiata L', 'jhu_fwe_md_Posterior thalamic radiation R', 'jhu_fwe_md_Posterior thalamic radiation L', 'jhu_fwe_md_Sagittal stratum R', 'jhu_fwe_md_Sagittal stratum L', 'jhu_fwe_md_External capsule R', 'jhu_fwe_md_External capsule L', 'jhu_fwe_md_Cingulate cingulum R', 'jhu_fwe_md_Cingulate cingulum L', 'jhu_fwe_md_Hippocampal cingulum R', 'jhu_fwe_md_Hippocampal cingulum L', 'jhu_fwe_md_Fornix crus / stria terminalis R', 'jhu_fwe_md_Fornix crus / stria terminalis L', 'jhu_fwe_md_Superior longitudinal fasciculus R', 'jhu_fwe_md_Superior longitudinal fasciculus L', 'jhu_fwe_md_Superior fronto-occipital fasciculus R', 'jhu_fwe_md_Superior fronto-occipital fasciculus L', 'jhu_fwe_md_Inferior fronto-occipital fasciculus R', 'jhu_fwe_md_Inferior fronto-occipital fasciculus L', 'jhu_fwe_md_Uncinate fasciculus R', 'jhu_fwe_md_Uncinate fasciculus L', 'jhu_fwe_md_Tapetum R', 'jhu_fwe_md_Tapetum L']
+
+Source: jhu_dti_fa
+  File Path         : /home/amyr/Projects/Cam-CAN/DATA/dwi/JHU_atlas/roi/dti_fa.csv
+  Detected ID Col   : id
+  Unique Subjects   : 635
+  Variables Selected: 50 -> ['jhu_dti_fa_Middle cerebellar peduncle', 'jhu_dti_fa_Pontine crossing tract', 'jhu_dti_fa_Genu of corpus callosum', 'jhu_dti_fa_Body of corpus callosum', 'jhu_dti_fa_Splenium of corpus callosum', 'jhu_dti_fa_Fornix (body/column)', 'jhu_dti_fa_Corticospinal tract R', 'jhu_dti_fa_Corticospinal tract L', 'jhu_dti_fa_Medial lemniscus R', 'jhu_dti_fa_Medial lemniscus L', 'jhu_dti_fa_Inferior cerebellar peduncle R', 'jhu_dti_fa_Inferior cerebellar peduncle L', 'jhu_dti_fa_Superior cerebellar peduncle R', 'jhu_dti_fa_Superior cerebellar peduncle L', 'jhu_dti_fa_Cerebral peduncle R', 'jhu_dti_fa_Cerebral peduncle L', 'jhu_dti_fa_Anterior limb of internal capsule R', 'jhu_dti_fa_Anterior limb of internal capsule L', 'jhu_dti_fa_Posterior limb of internal capsule R', 'jhu_dti_fa_Posterior limb of internal capsule L', 'jhu_dti_fa_Retrolenticular internal capsule R', 'jhu_dti_fa_Retrolenticular internal capsule L', 'jhu_dti_fa_Anterior corona radiata R', 'jhu_dti_fa_Anterior corona radiata L', 'jhu_dti_fa_Superior corona radiata R', 'jhu_dti_fa_Superior corona radiata L', 'jhu_dti_fa_Posterior corona radiata R', 'jhu_dti_fa_Posterior corona radiata L', 'jhu_dti_fa_Posterior thalamic radiation R', 'jhu_dti_fa_Posterior thalamic radiation L', 'jhu_dti_fa_Sagittal stratum R', 'jhu_dti_fa_Sagittal stratum L', 'jhu_dti_fa_External capsule R', 'jhu_dti_fa_External capsule L', 'jhu_dti_fa_Cingulate cingulum R', 'jhu_dti_fa_Cingulate cingulum L', 'jhu_dti_fa_Hippocampal cingulum R', 'jhu_dti_fa_Hippocampal cingulum L', 'jhu_dti_fa_Fornix crus / stria terminalis R', 'jhu_dti_fa_Fornix crus / stria terminalis L', 'jhu_dti_fa_Superior longitudinal fasciculus R', 'jhu_dti_fa_Superior longitudinal fasciculus L', 'jhu_dti_fa_Superior fronto-occipital fasciculus R', 'jhu_dti_fa_Superior fronto-occipital fasciculus L', 'jhu_dti_fa_Inferior fronto-occipital fasciculus R', 'jhu_dti_fa_Inferior fronto-occipital fasciculus L', 'jhu_dti_fa_Uncinate fasciculus R', 'jhu_dti_fa_Uncinate fasciculus L', 'jhu_dti_fa_Tapetum R', 'jhu_dti_fa_Tapetum L']
+
+Source: jhu_dti_md
+  File Path         : /home/amyr/Projects/Cam-CAN/DATA/dwi/JHU_atlas/roi/dti_md.csv
+  Detected ID Col   : id
+  Unique Subjects   : 635
+  Variables Selected: 50 -> ['jhu_dti_md_Middle cerebellar peduncle', 'jhu_dti_md_Pontine crossing tract', 'jhu_dti_md_Genu of corpus callosum', 'jhu_dti_md_Body of corpus callosum', 'jhu_dti_md_Splenium of corpus callosum', 'jhu_dti_md_Fornix (body/column)', 'jhu_dti_md_Corticospinal tract R', 'jhu_dti_md_Corticospinal tract L', 'jhu_dti_md_Medial lemniscus R', 'jhu_dti_md_Medial lemniscus L', 'jhu_dti_md_Inferior cerebellar peduncle R', 'jhu_dti_md_Inferior cerebellar peduncle L', 'jhu_dti_md_Superior cerebellar peduncle R', 'jhu_dti_md_Superior cerebellar peduncle L', 'jhu_dti_md_Cerebral peduncle R', 'jhu_dti_md_Cerebral peduncle L', 'jhu_dti_md_Anterior limb of internal capsule R', 'jhu_dti_md_Anterior limb of internal capsule L', 'jhu_dti_md_Posterior limb of internal capsule R', 'jhu_dti_md_Posterior limb of internal capsule L', 'jhu_dti_md_Retrolenticular internal capsule R', 'jhu_dti_md_Retrolenticular internal capsule L', 'jhu_dti_md_Anterior corona radiata R', 'jhu_dti_md_Anterior corona radiata L', 'jhu_dti_md_Superior corona radiata R', 'jhu_dti_md_Superior corona radiata L', 'jhu_dti_md_Posterior corona radiata R', 'jhu_dti_md_Posterior corona radiata L', 'jhu_dti_md_Posterior thalamic radiation R', 'jhu_dti_md_Posterior thalamic radiation L', 'jhu_dti_md_Sagittal stratum R', 'jhu_dti_md_Sagittal stratum L', 'jhu_dti_md_External capsule R', 'jhu_dti_md_External capsule L', 'jhu_dti_md_Cingulate cingulum R', 'jhu_dti_md_Cingulate cingulum L', 'jhu_dti_md_Hippocampal cingulum R', 'jhu_dti_md_Hippocampal cingulum L', 'jhu_dti_md_Fornix crus / stria terminalis R', 'jhu_dti_md_Fornix crus / stria terminalis L', 'jhu_dti_md_Superior longitudinal fasciculus R', 'jhu_dti_md_Superior longitudinal fasciculus L', 'jhu_dti_md_Superior fronto-occipital fasciculus R', 'jhu_dti_md_Superior fronto-occipital fasciculus L', 'jhu_dti_md_Inferior fronto-occipital fasciculus R', 'jhu_dti_md_Inferior fronto-occipital fasciculus L', 'jhu_dti_md_Uncinate fasciculus R', 'jhu_dti_md_Uncinate fasciculus L', 'jhu_dti_md_Tapetum R', 'jhu_dti_md_Tapetum L']
+
+Source: jhu_wmti_tortuosity
+  File Path         : /home/amyr/Projects/Cam-CAN/DATA/dwi/JHU_atlas/roi/wmti_tortuosity.csv
+  Detected ID Col   : id
+  Unique Subjects   : 635
+  Variables Selected: 50 -> ['jhu_wmti_tort_Middle cerebellar peduncle', 'jhu_wmti_tort_Pontine crossing tract', 'jhu_wmti_tort_Genu of corpus callosum', 'jhu_wmti_tort_Body of corpus callosum', 'jhu_wmti_tort_Splenium of corpus callosum', 'jhu_wmti_tort_Fornix (body/column)', 'jhu_wmti_tort_Corticospinal tract R', 'jhu_wmti_tort_Corticospinal tract L', 'jhu_wmti_tort_Medial lemniscus R', 'jhu_wmti_tort_Medial lemniscus L', 'jhu_wmti_tort_Inferior cerebellar peduncle R', 'jhu_wmti_tort_Inferior cerebellar peduncle L', 'jhu_wmti_tort_Superior cerebellar peduncle R', 'jhu_wmti_tort_Superior cerebellar peduncle L', 'jhu_wmti_tort_Cerebral peduncle R', 'jhu_wmti_tort_Cerebral peduncle L', 'jhu_wmti_tort_Anterior limb of internal capsule R', 'jhu_wmti_tort_Anterior limb of internal capsule L', 'jhu_wmti_tort_Posterior limb of internal capsule R', 'jhu_wmti_tort_Posterior limb of internal capsule L', 'jhu_wmti_tort_Retrolenticular internal capsule R', 'jhu_wmti_tort_Retrolenticular internal capsule L', 'jhu_wmti_tort_Anterior corona radiata R', 'jhu_wmti_tort_Anterior corona radiata L', 'jhu_wmti_tort_Superior corona radiata R', 'jhu_wmti_tort_Superior corona radiata L', 'jhu_wmti_tort_Posterior corona radiata R', 'jhu_wmti_tort_Posterior corona radiata L', 'jhu_wmti_tort_Posterior thalamic radiation R', 'jhu_wmti_tort_Posterior thalamic radiation L', 'jhu_wmti_tort_Sagittal stratum R', 'jhu_wmti_tort_Sagittal stratum L', 'jhu_wmti_tort_External capsule R', 'jhu_wmti_tort_External capsule L', 'jhu_wmti_tort_Cingulate cingulum R', 'jhu_wmti_tort_Cingulate cingulum L', 'jhu_wmti_tort_Hippocampal cingulum R', 'jhu_wmti_tort_Hippocampal cingulum L', 'jhu_wmti_tort_Fornix crus / stria terminalis R', 'jhu_wmti_tort_Fornix crus / stria terminalis L', 'jhu_wmti_tort_Superior longitudinal fasciculus R', 'jhu_wmti_tort_Superior longitudinal fasciculus L', 'jhu_wmti_tort_Superior fronto-occipital fasciculus R', 'jhu_wmti_tort_Superior fronto-occipital fasciculus L', 'jhu_wmti_tort_Inferior fronto-occipital fasciculus R', 'jhu_wmti_tort_Inferior fronto-occipital fasciculus L', 'jhu_wmti_tort_Uncinate fasciculus R', 'jhu_wmti_tort_Uncinate fasciculus L', 'jhu_wmti_tort_Tapetum R', 'jhu_wmti_tort_Tapetum L']
+
+Source: jhu_dki_mk
+  File Path         : /home/amyr/Projects/Cam-CAN/DATA/dwi/JHU_atlas/roi/dki_mk.csv
+  Detected ID Col   : id
+  Unique Subjects   : 635
+  Variables Selected: 50 -> ['jhu_dki_mk_Middle cerebellar peduncle', 'jhu_dki_mk_Pontine crossing tract', 'jhu_dki_mk_Genu of corpus callosum', 'jhu_dki_mk_Body of corpus callosum', 'jhu_dki_mk_Splenium of corpus callosum', 'jhu_dki_mk_Fornix (body/column)', 'jhu_dki_mk_Corticospinal tract R', 'jhu_dki_mk_Corticospinal tract L', 'jhu_dki_mk_Medial lemniscus R', 'jhu_dki_mk_Medial lemniscus L', 'jhu_dki_mk_Inferior cerebellar peduncle R', 'jhu_dki_mk_Inferior cerebellar peduncle L', 'jhu_dki_mk_Superior cerebellar peduncle R', 'jhu_dki_mk_Superior cerebellar peduncle L', 'jhu_dki_mk_Cerebral peduncle R', 'jhu_dki_mk_Cerebral peduncle L', 'jhu_dki_mk_Anterior limb of internal capsule R', 'jhu_dki_mk_Anterior limb of internal capsule L', 'jhu_dki_mk_Posterior limb of internal capsule R', 'jhu_dki_mk_Posterior limb of internal capsule L', 'jhu_dki_mk_Retrolenticular internal capsule R', 'jhu_dki_mk_Retrolenticular internal capsule L', 'jhu_dki_mk_Anterior corona radiata R', 'jhu_dki_mk_Anterior corona radiata L', 'jhu_dki_mk_Superior corona radiata R', 'jhu_dki_mk_Superior corona radiata L', 'jhu_dki_mk_Posterior corona radiata R', 'jhu_dki_mk_Posterior corona radiata L', 'jhu_dki_mk_Posterior thalamic radiation R', 'jhu_dki_mk_Posterior thalamic radiation L', 'jhu_dki_mk_Sagittal stratum R', 'jhu_dki_mk_Sagittal stratum L', 'jhu_dki_mk_External capsule R', 'jhu_dki_mk_External capsule L', 'jhu_dki_mk_Cingulate cingulum R', 'jhu_dki_mk_Cingulate cingulum L', 'jhu_dki_mk_Hippocampal cingulum R', 'jhu_dki_mk_Hippocampal cingulum L', 'jhu_dki_mk_Fornix crus / stria terminalis R', 'jhu_dki_mk_Fornix crus / stria terminalis L', 'jhu_dki_mk_Superior longitudinal fasciculus R', 'jhu_dki_mk_Superior longitudinal fasciculus L', 'jhu_dki_mk_Superior fronto-occipital fasciculus R', 'jhu_dki_mk_Superior fronto-occipital fasciculus L', 'jhu_dki_mk_Inferior fronto-occipital fasciculus R', 'jhu_dki_mk_Inferior fronto-occipital fasciculus L', 'jhu_dki_mk_Uncinate fasciculus R', 'jhu_dki_mk_Uncinate fasciculus L', 'jhu_dki_mk_Tapetum R', 'jhu_dki_mk_Tapetum L']
+
+Source: jhu_csf_dc
+  File Path         : /home/amyr/Projects/Cam-CAN/DATA/dwi/JHU_atlas/roi/csf_dc.csv
+  Detected ID Col   : id
+  Unique Subjects   : 635
+  Variables Selected: 50 -> ['jhu_csf_dc_Middle cerebellar peduncle', 'jhu_csf_dc_Pontine crossing tract', 'jhu_csf_dc_Genu of corpus callosum', 'jhu_csf_dc_Body of corpus callosum', 'jhu_csf_dc_Splenium of corpus callosum', 'jhu_csf_dc_Fornix (body/column)', 'jhu_csf_dc_Corticospinal tract R', 'jhu_csf_dc_Corticospinal tract L', 'jhu_csf_dc_Medial lemniscus R', 'jhu_csf_dc_Medial lemniscus L', 'jhu_csf_dc_Inferior cerebellar peduncle R', 'jhu_csf_dc_Inferior cerebellar peduncle L', 'jhu_csf_dc_Superior cerebellar peduncle R', 'jhu_csf_dc_Superior cerebellar peduncle L', 'jhu_csf_dc_Cerebral peduncle R', 'jhu_csf_dc_Cerebral peduncle L', 'jhu_csf_dc_Anterior limb of internal capsule R', 'jhu_csf_dc_Anterior limb of internal capsule L', 'jhu_csf_dc_Posterior limb of internal capsule R', 'jhu_csf_dc_Posterior limb of internal capsule L', 'jhu_csf_dc_Retrolenticular internal capsule R', 'jhu_csf_dc_Retrolenticular internal capsule L', 'jhu_csf_dc_Anterior corona radiata R', 'jhu_csf_dc_Anterior corona radiata L', 'jhu_csf_dc_Superior corona radiata R', 'jhu_csf_dc_Superior corona radiata L', 'jhu_csf_dc_Posterior corona radiata R', 'jhu_csf_dc_Posterior corona radiata L', 'jhu_csf_dc_Posterior thalamic radiation R', 'jhu_csf_dc_Posterior thalamic radiation L', 'jhu_csf_dc_Sagittal stratum R', 'jhu_csf_dc_Sagittal stratum L', 'jhu_csf_dc_External capsule R', 'jhu_csf_dc_External capsule L', 'jhu_csf_dc_Cingulate cingulum R', 'jhu_csf_dc_Cingulate cingulum L', 'jhu_csf_dc_Hippocampal cingulum R', 'jhu_csf_dc_Hippocampal cingulum L', 'jhu_csf_dc_Fornix crus / stria terminalis R', 'jhu_csf_dc_Fornix crus / stria terminalis L', 'jhu_csf_dc_Superior longitudinal fasciculus R', 'jhu_csf_dc_Superior longitudinal fasciculus L', 'jhu_csf_dc_Superior fronto-occipital fasciculus R', 'jhu_csf_dc_Superior fronto-occipital fasciculus L', 'jhu_csf_dc_Inferior fronto-occipital fasciculus R', 'jhu_csf_dc_Inferior fronto-occipital fasciculus L', 'jhu_csf_dc_Uncinate fasciculus R', 'jhu_csf_dc_Uncinate fasciculus L', 'jhu_csf_dc_Tapetum R', 'jhu_csf_dc_Tapetum L']
+
+Source: jhu_wm_dc
+  File Path         : /home/amyr/Projects/Cam-CAN/DATA/dwi/JHU_atlas/roi/wm_dc.csv
+  Detected ID Col   : id
+  Unique Subjects   : 635
+  Variables Selected: 50 -> ['jhu_wm_dc_Middle cerebellar peduncle', 'jhu_wm_dc_Pontine crossing tract', 'jhu_wm_dc_Genu of corpus callosum', 'jhu_wm_dc_Body of corpus callosum', 'jhu_wm_dc_Splenium of corpus callosum', 'jhu_wm_dc_Fornix (body/column)', 'jhu_wm_dc_Corticospinal tract R', 'jhu_wm_dc_Corticospinal tract L', 'jhu_wm_dc_Medial lemniscus R', 'jhu_wm_dc_Medial lemniscus L', 'jhu_wm_dc_Inferior cerebellar peduncle R', 'jhu_wm_dc_Inferior cerebellar peduncle L', 'jhu_wm_dc_Superior cerebellar peduncle R', 'jhu_wm_dc_Superior cerebellar peduncle L', 'jhu_wm_dc_Cerebral peduncle R', 'jhu_wm_dc_Cerebral peduncle L', 'jhu_wm_dc_Anterior limb of internal capsule R', 'jhu_wm_dc_Anterior limb of internal capsule L', 'jhu_wm_dc_Posterior limb of internal capsule R', 'jhu_wm_dc_Posterior limb of internal capsule L', 'jhu_wm_dc_Retrolenticular internal capsule R', 'jhu_wm_dc_Retrolenticular internal capsule L', 'jhu_wm_dc_Anterior corona radiata R', 'jhu_wm_dc_Anterior corona radiata L', 'jhu_wm_dc_Superior corona radiata R', 'jhu_wm_dc_Superior corona radiata L', 'jhu_wm_dc_Posterior corona radiata R', 'jhu_wm_dc_Posterior corona radiata L', 'jhu_wm_dc_Posterior thalamic radiation R', 'jhu_wm_dc_Posterior thalamic radiation L', 'jhu_wm_dc_Sagittal stratum R', 'jhu_wm_dc_Sagittal stratum L', 'jhu_wm_dc_External capsule R', 'jhu_wm_dc_External capsule L', 'jhu_wm_dc_Cingulate cingulum R', 'jhu_wm_dc_Cingulate cingulum L', 'jhu_wm_dc_Hippocampal cingulum R', 'jhu_wm_dc_Hippocampal cingulum L', 'jhu_wm_dc_Fornix crus / stria terminalis R', 'jhu_wm_dc_Fornix crus / stria terminalis L', 'jhu_wm_dc_Superior longitudinal fasciculus R', 'jhu_wm_dc_Superior longitudinal fasciculus L', 'jhu_wm_dc_Superior fronto-occipital fasciculus R', 'jhu_wm_dc_Superior fronto-occipital fasciculus L', 'jhu_wm_dc_Inferior fronto-occipital fasciculus R', 'jhu_wm_dc_Inferior fronto-occipital fasciculus L', 'jhu_wm_dc_Uncinate fasciculus R', 'jhu_wm_dc_Uncinate fasciculus L', 'jhu_wm_dc_Tapetum R', 'jhu_wm_dc_Tapetum L']
+
+Source: global_summary
+  File Path         : /home/amyr/Projects/Cam-CAN/DATA/anat/morphometry_tables/global_summary.csv
+  Detected ID Col   : id
+  Unique Subjects   : 648
+  Variables Selected: 6 -> ['eTIV', 'aseg_summary_BrainSegVol', 'aseg_summary_BrainSegVolNotVent', 'aseg_summary_VentricleChoroidVol', 'aseg_summary_TotalGrayVol', 'aseg_summary_CerebralWhiteMatterVol']
+
+Source: aseg_volume
+  File Path         : /home/amyr/Projects/Cam-CAN/DATA/anat/morphometry_tables/aseg_volume.csv
+  Detected ID Col   : id
+  Unique Subjects   : 648
+  Variables Selected: 5 -> ['aseg_Left_Lateral_Ventricle_volume', 'aseg_Right_Lateral_Ventricle_volume', 'aseg_Left_Inf_Lat_Vent_volume', 'aseg_Right_Inf_Lat_Vent_volume', 'aseg_3rd_Ventricle_volume']
+
+--------------------------------------------------------------------------------
+SEQUENTIAL MERGE TRACKING
+--------------------------------------------------------------------------------
+Step Source              Strategy  Left    Right   Common  Retained  Lost  
+--------------------------------------------------------------------------------
+1    participants        initial   653     653     653     653       0     
+2    demography          inner     653     2681    653     653       2028  
+3    cattell             inner     653     660     634     634       45    
+4    rt_simple           inner     634     2374    588     588       1832  
+5    rt_choice           inner     588     2327    577     577       1761  
+6    mri_behavioral      inner     577     638     564     564       87    
+7    jhu_wmti_awf        inner     564     635     550     550       99    
+8    jhu_fwe_fa          inner     550     635     550     550       85    
+9    jhu_fwe_fraction    inner     550     635     550     550       85    
+10   jhu_fwe_md          inner     550     635     550     550       85    
+11   jhu_dti_fa          inner     550     635     550     550       85    
+12   jhu_dti_md          inner     550     635     550     550       85    
+13   jhu_wmti_tortuosity inner     550     635     550     550       85    
+14   jhu_dki_mk          inner     550     635     550     550       85    
+15   jhu_csf_dc          inner     550     635     550     550       85    
+16   jhu_wm_dc           inner     550     635     550     550       85    
+17   global_summary      inner     550     648     550     550       98    
+18   aseg_volume         inner     550     648     550     550       98    
+--------------------------------------------------------------------------------
+FILTERING AND COHORT RETENTION
+--------------------------------------------------------------------------------
+Post-Merge Combined Subjects : 550
+Participant Filter Retained  : 550
+Complete Cases Retained      : 550
+Final Analysis Cohort Size   : 550
+Final Total Features (No ID) : 561
+--------------------------------------------------------------------------------
+VARIABLE-LEVEL SUMMARY AND MISSING DATA PROFILES
+--------------------------------------------------------------------------------
+Variable Name                             Type      Valid   Missing   % Missing 
+--------------------------------------------------------------------------------
+age                                       float64   550     0         0.00      
+sex                                       str       550     0         0.00      
+handedness                                float64   549     1         0.18      
+years_education                           float64   549     1         0.18      
+additional_acer                           float64   550     0         0.00      
+additional_alcohol                        str       549     1         0.18      
+additional_attention_orientation          float64   550     0         0.00      
+additional_fluencies                      float64   550     0         0.00      
+additional_HADS_anx_category              str       548     2         0.36      
+additional_HADS_anxiety                   float64   548     2         0.36      
+additional_HADS_dep_category              str       548     2         0.36      
+additional_HADS_depression                float64   549     1         0.18      
+additional_hours_in_bed                   float64   548     2         0.36      
+additional_hours_slept                    float64   544     6         1.09      
+additional_language                       float64   550     0         0.00      
+additional_memory                         float64   550     0         0.00      
+additional_psqi                           float64   526     24        4.36      
+additional_qual                           str       515     35        6.36      
+additional_sleep_efficiency               float64   531     19        3.45      
+additional_smoker                         str       547     3         0.55      
+additional_visuospatial                   float64   550     0         0.00      
+cattell_SubScore1                         int64     550     0         0.00      
+cattell_SubScore2                         int64     550     0         0.00      
+cattell_SubScore3                         int64     550     0         0.00      
+cattell_SubScore4                         int64     550     0         0.00      
+cattell_TotalScore                        int64     550     0         0.00      
+rt_simple_Include_participant             int64     550     0         0.00      
+rt_simple_RTmean                          float64   550     0         0.00      
+rt_simple_RTsd                            float64   550     0         0.00      
+rt_simple_RTcv                            float64   550     0         0.00      
+rt_simple_invRTmean                       float64   550     0         0.00      
+rt_simple_invRTsd                         float64   550     0         0.00      
+rt_simple_RTtrim3mean                     float64   550     0         0.00      
+rt_simple_RTtrim3sd                       float64   550     0         0.00      
+rt_choice_Include_participant             int64     550     0         0.00      
+rt_choice_RTmean_all                      float64   550     0         0.00      
+rt_choice_RTsd_all                        float64   550     0         0.00      
+rt_choice_RTcv_all                        float64   550     0         0.00      
+rt_choice_invRTmean_all                   float64   550     0         0.00      
+rt_choice_invRTsd_all                     float64   550     0         0.00      
+rt_choice_RTtrim3mean_all                 float64   550     0         0.00      
+rt_choice_RTtrim3sd_all                   float64   550     0         0.00      
+mri_behav_include_participant             float64   550     0         0.00      
+mri_behav_mRT                             float64   550     0         0.00      
+mri_behav_stdRT                           float64   550     0         0.00      
+mri_behav_cvRT                            float64   550     0         0.00      
+mri_behav_mRT_inv                         float64   550     0         0.00      
+mri_behav_stdRT_inv                       float64   550     0         0.00      
+mri_behav_mRT_trim                        float64   550     0         0.00      
+mri_behav_stdRT_trim                      float64   550     0         0.00      
+jhu_wmti_awf_Middle cerebellar peduncle   float64   541     9         1.64      
+jhu_wmti_awf_Pontine crossing tract       float64   541     9         1.64      
+jhu_wmti_awf_Genu of corpus callosum      float64   541     9         1.64      
+jhu_wmti_awf_Body of corpus callosum      float64   541     9         1.64      
+jhu_wmti_awf_Splenium of corpus callosum  float64   541     9         1.64      
+jhu_wmti_awf_Fornix (body/column)         float64   541     9         1.64      
+jhu_wmti_awf_Corticospinal tract R        float64   541     9         1.64      
+jhu_wmti_awf_Corticospinal tract L        float64   541     9         1.64      
+jhu_wmti_awf_Medial lemniscus R           float64   541     9         1.64      
+jhu_wmti_awf_Medial lemniscus L           float64   541     9         1.64      
+jhu_wmti_awf_Inferior cerebellar peduncle Rfloat64   541     9         1.64      
+jhu_wmti_awf_Inferior cerebellar peduncle Lfloat64   541     9         1.64      
+jhu_wmti_awf_Superior cerebellar peduncle Rfloat64   541     9         1.64      
+jhu_wmti_awf_Superior cerebellar peduncle Lfloat64   541     9         1.64      
+jhu_wmti_awf_Cerebral peduncle R          float64   541     9         1.64      
+jhu_wmti_awf_Cerebral peduncle L          float64   541     9         1.64      
+jhu_wmti_awf_Anterior limb of internal capsule Rfloat64   541     9         1.64      
+jhu_wmti_awf_Anterior limb of internal capsule Lfloat64   541     9         1.64      
+jhu_wmti_awf_Posterior limb of internal capsule Rfloat64   541     9         1.64      
+jhu_wmti_awf_Posterior limb of internal capsule Lfloat64   541     9         1.64      
+jhu_wmti_awf_Retrolenticular internal capsule Rfloat64   541     9         1.64      
+jhu_wmti_awf_Retrolenticular internal capsule Lfloat64   541     9         1.64      
+jhu_wmti_awf_Anterior corona radiata R    float64   541     9         1.64      
+jhu_wmti_awf_Anterior corona radiata L    float64   541     9         1.64      
+jhu_wmti_awf_Superior corona radiata R    float64   541     9         1.64      
+jhu_wmti_awf_Superior corona radiata L    float64   541     9         1.64      
+jhu_wmti_awf_Posterior corona radiata R   float64   541     9         1.64      
+jhu_wmti_awf_Posterior corona radiata L   float64   541     9         1.64      
+jhu_wmti_awf_Posterior thalamic radiation Rfloat64   541     9         1.64      
+jhu_wmti_awf_Posterior thalamic radiation Lfloat64   541     9         1.64      
+jhu_wmti_awf_Sagittal stratum R           float64   541     9         1.64      
+jhu_wmti_awf_Sagittal stratum L           float64   541     9         1.64      
+jhu_wmti_awf_External capsule R           float64   541     9         1.64      
+jhu_wmti_awf_External capsule L           float64   541     9         1.64      
+jhu_wmti_awf_Cingulate cingulum R         float64   541     9         1.64      
+jhu_wmti_awf_Cingulate cingulum L         float64   541     9         1.64      
+jhu_wmti_awf_Hippocampal cingulum R       float64   541     9         1.64      
+jhu_wmti_awf_Hippocampal cingulum L       float64   541     9         1.64      
+jhu_wmti_awf_Fornix crus / stria terminalis Rfloat64   541     9         1.64      
+jhu_wmti_awf_Fornix crus / stria terminalis Lfloat64   541     9         1.64      
+jhu_wmti_awf_Superior longitudinal fasciculus Rfloat64   541     9         1.64      
+jhu_wmti_awf_Superior longitudinal fasciculus Lfloat64   541     9         1.64      
+jhu_wmti_awf_Superior fronto-occipital fasciculus Rfloat64   541     9         1.64      
+jhu_wmti_awf_Superior fronto-occipital fasciculus Lfloat64   541     9         1.64      
+jhu_wmti_awf_Inferior fronto-occipital fasciculus Rfloat64   541     9         1.64      
+jhu_wmti_awf_Inferior fronto-occipital fasciculus Lfloat64   541     9         1.64      
+jhu_wmti_awf_Uncinate fasciculus R        float64   541     9         1.64      
+jhu_wmti_awf_Uncinate fasciculus L        float64   541     9         1.64      
+jhu_wmti_awf_Tapetum R                    float64   541     9         1.64      
+jhu_wmti_awf_Tapetum L                    float64   541     9         1.64      
+jhu_fwe_fa_Middle cerebellar peduncle     float64   541     9         1.64      
+jhu_fwe_fa_Pontine crossing tract         float64   541     9         1.64      
+jhu_fwe_fa_Genu of corpus callosum        float64   541     9         1.64      
+jhu_fwe_fa_Body of corpus callosum        float64   541     9         1.64      
+jhu_fwe_fa_Splenium of corpus callosum    float64   541     9         1.64      
+jhu_fwe_fa_Fornix (body/column)           float64   541     9         1.64      
+jhu_fwe_fa_Corticospinal tract R          float64   541     9         1.64      
+jhu_fwe_fa_Corticospinal tract L          float64   541     9         1.64      
+jhu_fwe_fa_Medial lemniscus R             float64   541     9         1.64      
+jhu_fwe_fa_Medial lemniscus L             float64   541     9         1.64      
+jhu_fwe_fa_Inferior cerebellar peduncle R float64   541     9         1.64      
+jhu_fwe_fa_Inferior cerebellar peduncle L float64   541     9         1.64      
+jhu_fwe_fa_Superior cerebellar peduncle R float64   541     9         1.64      
+jhu_fwe_fa_Superior cerebellar peduncle L float64   541     9         1.64      
+jhu_fwe_fa_Cerebral peduncle R            float64   541     9         1.64      
+jhu_fwe_fa_Cerebral peduncle L            float64   541     9         1.64      
+jhu_fwe_fa_Anterior limb of internal capsule Rfloat64   541     9         1.64      
+jhu_fwe_fa_Anterior limb of internal capsule Lfloat64   541     9         1.64      
+jhu_fwe_fa_Posterior limb of internal capsule Rfloat64   541     9         1.64      
+jhu_fwe_fa_Posterior limb of internal capsule Lfloat64   541     9         1.64      
+jhu_fwe_fa_Retrolenticular internal capsule Rfloat64   541     9         1.64      
+jhu_fwe_fa_Retrolenticular internal capsule Lfloat64   541     9         1.64      
+jhu_fwe_fa_Anterior corona radiata R      float64   541     9         1.64      
+jhu_fwe_fa_Anterior corona radiata L      float64   541     9         1.64      
+jhu_fwe_fa_Superior corona radiata R      float64   541     9         1.64      
+jhu_fwe_fa_Superior corona radiata L      float64   541     9         1.64      
+jhu_fwe_fa_Posterior corona radiata R     float64   541     9         1.64      
+jhu_fwe_fa_Posterior corona radiata L     float64   541     9         1.64      
+jhu_fwe_fa_Posterior thalamic radiation R float64   541     9         1.64      
+jhu_fwe_fa_Posterior thalamic radiation L float64   541     9         1.64      
+jhu_fwe_fa_Sagittal stratum R             float64   541     9         1.64      
+jhu_fwe_fa_Sagittal stratum L             float64   541     9         1.64      
+jhu_fwe_fa_External capsule R             float64   541     9         1.64      
+jhu_fwe_fa_External capsule L             float64   541     9         1.64      
+jhu_fwe_fa_Cingulate cingulum R           float64   541     9         1.64      
+jhu_fwe_fa_Cingulate cingulum L           float64   541     9         1.64      
+jhu_fwe_fa_Hippocampal cingulum R         float64   541     9         1.64      
+jhu_fwe_fa_Hippocampal cingulum L         float64   541     9         1.64      
+jhu_fwe_fa_Fornix crus / stria terminalis Rfloat64   541     9         1.64      
+jhu_fwe_fa_Fornix crus / stria terminalis Lfloat64   541     9         1.64      
+jhu_fwe_fa_Superior longitudinal fasciculus Rfloat64   541     9         1.64      
+jhu_fwe_fa_Superior longitudinal fasciculus Lfloat64   541     9         1.64      
+jhu_fwe_fa_Superior fronto-occipital fasciculus Rfloat64   541     9         1.64      
+jhu_fwe_fa_Superior fronto-occipital fasciculus Lfloat64   541     9         1.64      
+jhu_fwe_fa_Inferior fronto-occipital fasciculus Rfloat64   541     9         1.64      
+jhu_fwe_fa_Inferior fronto-occipital fasciculus Lfloat64   541     9         1.64      
+jhu_fwe_fa_Uncinate fasciculus R          float64   541     9         1.64      
+jhu_fwe_fa_Uncinate fasciculus L          float64   541     9         1.64      
+jhu_fwe_fa_Tapetum R                      float64   541     9         1.64      
+jhu_fwe_fa_Tapetum L                      float64   541     9         1.64      
+jhu_fwe_frac_Middle cerebellar peduncle   float64   541     9         1.64      
+jhu_fwe_frac_Pontine crossing tract       float64   541     9         1.64      
+jhu_fwe_frac_Genu of corpus callosum      float64   541     9         1.64      
+jhu_fwe_frac_Body of corpus callosum      float64   541     9         1.64      
+jhu_fwe_frac_Splenium of corpus callosum  float64   541     9         1.64      
+jhu_fwe_frac_Fornix (body/column)         float64   541     9         1.64      
+jhu_fwe_frac_Corticospinal tract R        float64   541     9         1.64      
+jhu_fwe_frac_Corticospinal tract L        float64   541     9         1.64      
+jhu_fwe_frac_Medial lemniscus R           float64   541     9         1.64      
+jhu_fwe_frac_Medial lemniscus L           float64   541     9         1.64      
+jhu_fwe_frac_Inferior cerebellar peduncle Rfloat64   541     9         1.64      
+jhu_fwe_frac_Inferior cerebellar peduncle Lfloat64   541     9         1.64      
+jhu_fwe_frac_Superior cerebellar peduncle Rfloat64   541     9         1.64      
+jhu_fwe_frac_Superior cerebellar peduncle Lfloat64   541     9         1.64      
+jhu_fwe_frac_Cerebral peduncle R          float64   541     9         1.64      
+jhu_fwe_frac_Cerebral peduncle L          float64   541     9         1.64      
+jhu_fwe_frac_Anterior limb of internal capsule Rfloat64   541     9         1.64      
+jhu_fwe_frac_Anterior limb of internal capsule Lfloat64   541     9         1.64      
+jhu_fwe_frac_Posterior limb of internal capsule Rfloat64   541     9         1.64      
+jhu_fwe_frac_Posterior limb of internal capsule Lfloat64   541     9         1.64      
+jhu_fwe_frac_Retrolenticular internal capsule Rfloat64   541     9         1.64      
+jhu_fwe_frac_Retrolenticular internal capsule Lfloat64   541     9         1.64      
+jhu_fwe_frac_Anterior corona radiata R    float64   541     9         1.64      
+jhu_fwe_frac_Anterior corona radiata L    float64   541     9         1.64      
+jhu_fwe_frac_Superior corona radiata R    float64   541     9         1.64      
+jhu_fwe_frac_Superior corona radiata L    float64   541     9         1.64      
+jhu_fwe_frac_Posterior corona radiata R   float64   541     9         1.64      
+jhu_fwe_frac_Posterior corona radiata L   float64   541     9         1.64      
+jhu_fwe_frac_Posterior thalamic radiation Rfloat64   541     9         1.64      
+jhu_fwe_frac_Posterior thalamic radiation Lfloat64   541     9         1.64      
+jhu_fwe_frac_Sagittal stratum R           float64   541     9         1.64      
+jhu_fwe_frac_Sagittal stratum L           float64   541     9         1.64      
+jhu_fwe_frac_External capsule R           float64   541     9         1.64      
+jhu_fwe_frac_External capsule L           float64   541     9         1.64      
+jhu_fwe_frac_Cingulate cingulum R         float64   541     9         1.64      
+jhu_fwe_frac_Cingulate cingulum L         float64   541     9         1.64      
+jhu_fwe_frac_Hippocampal cingulum R       float64   541     9         1.64      
+jhu_fwe_frac_Hippocampal cingulum L       float64   541     9         1.64      
+jhu_fwe_frac_Fornix crus / stria terminalis Rfloat64   541     9         1.64      
+jhu_fwe_frac_Fornix crus / stria terminalis Lfloat64   541     9         1.64      
+jhu_fwe_frac_Superior longitudinal fasciculus Rfloat64   541     9         1.64      
+jhu_fwe_frac_Superior longitudinal fasciculus Lfloat64   541     9         1.64      
+jhu_fwe_frac_Superior fronto-occipital fasciculus Rfloat64   541     9         1.64      
+jhu_fwe_frac_Superior fronto-occipital fasciculus Lfloat64   541     9         1.64      
+jhu_fwe_frac_Inferior fronto-occipital fasciculus Rfloat64   541     9         1.64      
+jhu_fwe_frac_Inferior fronto-occipital fasciculus Lfloat64   541     9         1.64      
+jhu_fwe_frac_Uncinate fasciculus R        float64   541     9         1.64      
+jhu_fwe_frac_Uncinate fasciculus L        float64   541     9         1.64      
+jhu_fwe_frac_Tapetum R                    float64   541     9         1.64      
+jhu_fwe_frac_Tapetum L                    float64   541     9         1.64      
+jhu_fwe_md_Middle cerebellar peduncle     float64   541     9         1.64      
+jhu_fwe_md_Pontine crossing tract         float64   541     9         1.64      
+jhu_fwe_md_Genu of corpus callosum        float64   541     9         1.64      
+jhu_fwe_md_Body of corpus callosum        float64   541     9         1.64      
+jhu_fwe_md_Splenium of corpus callosum    float64   541     9         1.64      
+jhu_fwe_md_Fornix (body/column)           float64   541     9         1.64      
+jhu_fwe_md_Corticospinal tract R          float64   541     9         1.64      
+jhu_fwe_md_Corticospinal tract L          float64   541     9         1.64      
+jhu_fwe_md_Medial lemniscus R             float64   541     9         1.64      
+jhu_fwe_md_Medial lemniscus L             float64   541     9         1.64      
+jhu_fwe_md_Inferior cerebellar peduncle R float64   541     9         1.64      
+jhu_fwe_md_Inferior cerebellar peduncle L float64   541     9         1.64      
+jhu_fwe_md_Superior cerebellar peduncle R float64   541     9         1.64      
+jhu_fwe_md_Superior cerebellar peduncle L float64   541     9         1.64      
+jhu_fwe_md_Cerebral peduncle R            float64   541     9         1.64      
+jhu_fwe_md_Cerebral peduncle L            float64   541     9         1.64      
+jhu_fwe_md_Anterior limb of internal capsule Rfloat64   541     9         1.64      
+jhu_fwe_md_Anterior limb of internal capsule Lfloat64   541     9         1.64      
+jhu_fwe_md_Posterior limb of internal capsule Rfloat64   541     9         1.64      
+jhu_fwe_md_Posterior limb of internal capsule Lfloat64   541     9         1.64      
+jhu_fwe_md_Retrolenticular internal capsule Rfloat64   541     9         1.64      
+jhu_fwe_md_Retrolenticular internal capsule Lfloat64   541     9         1.64      
+jhu_fwe_md_Anterior corona radiata R      float64   541     9         1.64      
+jhu_fwe_md_Anterior corona radiata L      float64   541     9         1.64      
+jhu_fwe_md_Superior corona radiata R      float64   541     9         1.64      
+jhu_fwe_md_Superior corona radiata L      float64   541     9         1.64      
+jhu_fwe_md_Posterior corona radiata R     float64   541     9         1.64      
+jhu_fwe_md_Posterior corona radiata L     float64   541     9         1.64      
+jhu_fwe_md_Posterior thalamic radiation R float64   541     9         1.64      
+jhu_fwe_md_Posterior thalamic radiation L float64   541     9         1.64      
+jhu_fwe_md_Sagittal stratum R             float64   541     9         1.64      
+jhu_fwe_md_Sagittal stratum L             float64   541     9         1.64      
+jhu_fwe_md_External capsule R             float64   541     9         1.64      
+jhu_fwe_md_External capsule L             float64   541     9         1.64      
+jhu_fwe_md_Cingulate cingulum R           float64   541     9         1.64      
+jhu_fwe_md_Cingulate cingulum L           float64   541     9         1.64      
+jhu_fwe_md_Hippocampal cingulum R         float64   541     9         1.64      
+jhu_fwe_md_Hippocampal cingulum L         float64   541     9         1.64      
+jhu_fwe_md_Fornix crus / stria terminalis Rfloat64   541     9         1.64      
+jhu_fwe_md_Fornix crus / stria terminalis Lfloat64   541     9         1.64      
+jhu_fwe_md_Superior longitudinal fasciculus Rfloat64   541     9         1.64      
+jhu_fwe_md_Superior longitudinal fasciculus Lfloat64   541     9         1.64      
+jhu_fwe_md_Superior fronto-occipital fasciculus Rfloat64   541     9         1.64      
+jhu_fwe_md_Superior fronto-occipital fasciculus Lfloat64   541     9         1.64      
+jhu_fwe_md_Inferior fronto-occipital fasciculus Rfloat64   541     9         1.64      
+jhu_fwe_md_Inferior fronto-occipital fasciculus Lfloat64   541     9         1.64      
+jhu_fwe_md_Uncinate fasciculus R          float64   541     9         1.64      
+jhu_fwe_md_Uncinate fasciculus L          float64   541     9         1.64      
+jhu_fwe_md_Tapetum R                      float64   541     9         1.64      
+jhu_fwe_md_Tapetum L                      float64   541     9         1.64      
+jhu_dti_fa_Middle cerebellar peduncle     float64   550     0         0.00      
+jhu_dti_fa_Pontine crossing tract         float64   550     0         0.00      
+jhu_dti_fa_Genu of corpus callosum        float64   550     0         0.00      
+jhu_dti_fa_Body of corpus callosum        float64   550     0         0.00      
+jhu_dti_fa_Splenium of corpus callosum    float64   550     0         0.00      
+jhu_dti_fa_Fornix (body/column)           float64   550     0         0.00      
+jhu_dti_fa_Corticospinal tract R          float64   550     0         0.00      
+jhu_dti_fa_Corticospinal tract L          float64   550     0         0.00      
+jhu_dti_fa_Medial lemniscus R             float64   550     0         0.00      
+jhu_dti_fa_Medial lemniscus L             float64   550     0         0.00      
+jhu_dti_fa_Inferior cerebellar peduncle R float64   550     0         0.00      
+jhu_dti_fa_Inferior cerebellar peduncle L float64   550     0         0.00      
+jhu_dti_fa_Superior cerebellar peduncle R float64   550     0         0.00      
+jhu_dti_fa_Superior cerebellar peduncle L float64   550     0         0.00      
+jhu_dti_fa_Cerebral peduncle R            float64   550     0         0.00      
+jhu_dti_fa_Cerebral peduncle L            float64   550     0         0.00      
+jhu_dti_fa_Anterior limb of internal capsule Rfloat64   550     0         0.00      
+jhu_dti_fa_Anterior limb of internal capsule Lfloat64   550     0         0.00      
+jhu_dti_fa_Posterior limb of internal capsule Rfloat64   550     0         0.00      
+jhu_dti_fa_Posterior limb of internal capsule Lfloat64   550     0         0.00      
+jhu_dti_fa_Retrolenticular internal capsule Rfloat64   550     0         0.00      
+jhu_dti_fa_Retrolenticular internal capsule Lfloat64   550     0         0.00      
+jhu_dti_fa_Anterior corona radiata R      float64   550     0         0.00      
+jhu_dti_fa_Anterior corona radiata L      float64   550     0         0.00      
+jhu_dti_fa_Superior corona radiata R      float64   550     0         0.00      
+jhu_dti_fa_Superior corona radiata L      float64   550     0         0.00      
+jhu_dti_fa_Posterior corona radiata R     float64   550     0         0.00      
+jhu_dti_fa_Posterior corona radiata L     float64   550     0         0.00      
+jhu_dti_fa_Posterior thalamic radiation R float64   550     0         0.00      
+jhu_dti_fa_Posterior thalamic radiation L float64   550     0         0.00      
+jhu_dti_fa_Sagittal stratum R             float64   550     0         0.00      
+jhu_dti_fa_Sagittal stratum L             float64   550     0         0.00      
+jhu_dti_fa_External capsule R             float64   550     0         0.00      
+jhu_dti_fa_External capsule L             float64   550     0         0.00      
+jhu_dti_fa_Cingulate cingulum R           float64   550     0         0.00      
+jhu_dti_fa_Cingulate cingulum L           float64   550     0         0.00      
+jhu_dti_fa_Hippocampal cingulum R         float64   550     0         0.00      
+jhu_dti_fa_Hippocampal cingulum L         float64   550     0         0.00      
+jhu_dti_fa_Fornix crus / stria terminalis Rfloat64   550     0         0.00      
+jhu_dti_fa_Fornix crus / stria terminalis Lfloat64   550     0         0.00      
+jhu_dti_fa_Superior longitudinal fasciculus Rfloat64   550     0         0.00      
+jhu_dti_fa_Superior longitudinal fasciculus Lfloat64   550     0         0.00      
+jhu_dti_fa_Superior fronto-occipital fasciculus Rfloat64   550     0         0.00      
+jhu_dti_fa_Superior fronto-occipital fasciculus Lfloat64   550     0         0.00      
+jhu_dti_fa_Inferior fronto-occipital fasciculus Rfloat64   550     0         0.00      
+jhu_dti_fa_Inferior fronto-occipital fasciculus Lfloat64   550     0         0.00      
+jhu_dti_fa_Uncinate fasciculus R          float64   550     0         0.00      
+jhu_dti_fa_Uncinate fasciculus L          float64   550     0         0.00      
+jhu_dti_fa_Tapetum R                      float64   550     0         0.00      
+jhu_dti_fa_Tapetum L                      float64   550     0         0.00      
+jhu_dti_md_Middle cerebellar peduncle     float64   550     0         0.00      
+jhu_dti_md_Pontine crossing tract         float64   550     0         0.00      
+jhu_dti_md_Genu of corpus callosum        float64   550     0         0.00      
+jhu_dti_md_Body of corpus callosum        float64   550     0         0.00      
+jhu_dti_md_Splenium of corpus callosum    float64   550     0         0.00      
+jhu_dti_md_Fornix (body/column)           float64   550     0         0.00      
+jhu_dti_md_Corticospinal tract R          float64   550     0         0.00      
+jhu_dti_md_Corticospinal tract L          float64   550     0         0.00      
+jhu_dti_md_Medial lemniscus R             float64   550     0         0.00      
+jhu_dti_md_Medial lemniscus L             float64   550     0         0.00      
+jhu_dti_md_Inferior cerebellar peduncle R float64   550     0         0.00      
+jhu_dti_md_Inferior cerebellar peduncle L float64   550     0         0.00      
+jhu_dti_md_Superior cerebellar peduncle R float64   550     0         0.00      
+jhu_dti_md_Superior cerebellar peduncle L float64   550     0         0.00      
+jhu_dti_md_Cerebral peduncle R            float64   550     0         0.00      
+jhu_dti_md_Cerebral peduncle L            float64   550     0         0.00      
+jhu_dti_md_Anterior limb of internal capsule Rfloat64   550     0         0.00      
+jhu_dti_md_Anterior limb of internal capsule Lfloat64   550     0         0.00      
+jhu_dti_md_Posterior limb of internal capsule Rfloat64   550     0         0.00      
+jhu_dti_md_Posterior limb of internal capsule Lfloat64   550     0         0.00      
+jhu_dti_md_Retrolenticular internal capsule Rfloat64   550     0         0.00      
+jhu_dti_md_Retrolenticular internal capsule Lfloat64   550     0         0.00      
+jhu_dti_md_Anterior corona radiata R      float64   550     0         0.00      
+jhu_dti_md_Anterior corona radiata L      float64   550     0         0.00      
+jhu_dti_md_Superior corona radiata R      float64   550     0         0.00      
+jhu_dti_md_Superior corona radiata L      float64   550     0         0.00      
+jhu_dti_md_Posterior corona radiata R     float64   550     0         0.00      
+jhu_dti_md_Posterior corona radiata L     float64   550     0         0.00      
+jhu_dti_md_Posterior thalamic radiation R float64   550     0         0.00      
+jhu_dti_md_Posterior thalamic radiation L float64   550     0         0.00      
+jhu_dti_md_Sagittal stratum R             float64   550     0         0.00      
+jhu_dti_md_Sagittal stratum L             float64   550     0         0.00      
+jhu_dti_md_External capsule R             float64   550     0         0.00      
+jhu_dti_md_External capsule L             float64   550     0         0.00      
+jhu_dti_md_Cingulate cingulum R           float64   550     0         0.00      
+jhu_dti_md_Cingulate cingulum L           float64   550     0         0.00      
+jhu_dti_md_Hippocampal cingulum R         float64   550     0         0.00      
+jhu_dti_md_Hippocampal cingulum L         float64   550     0         0.00      
+jhu_dti_md_Fornix crus / stria terminalis Rfloat64   550     0         0.00      
+jhu_dti_md_Fornix crus / stria terminalis Lfloat64   550     0         0.00      
+jhu_dti_md_Superior longitudinal fasciculus Rfloat64   550     0         0.00      
+jhu_dti_md_Superior longitudinal fasciculus Lfloat64   550     0         0.00      
+jhu_dti_md_Superior fronto-occipital fasciculus Rfloat64   550     0         0.00      
+jhu_dti_md_Superior fronto-occipital fasciculus Lfloat64   550     0         0.00      
+jhu_dti_md_Inferior fronto-occipital fasciculus Rfloat64   550     0         0.00      
+jhu_dti_md_Inferior fronto-occipital fasciculus Lfloat64   550     0         0.00      
+jhu_dti_md_Uncinate fasciculus R          float64   550     0         0.00      
+jhu_dti_md_Uncinate fasciculus L          float64   550     0         0.00      
+jhu_dti_md_Tapetum R                      float64   550     0         0.00      
+jhu_dti_md_Tapetum L                      float64   550     0         0.00      
+jhu_wmti_tort_Middle cerebellar peduncle  float64   541     9         1.64      
+jhu_wmti_tort_Pontine crossing tract      float64   541     9         1.64      
+jhu_wmti_tort_Genu of corpus callosum     float64   541     9         1.64      
+jhu_wmti_tort_Body of corpus callosum     float64   541     9         1.64      
+jhu_wmti_tort_Splenium of corpus callosum float64   541     9         1.64      
+jhu_wmti_tort_Fornix (body/column)        float64   541     9         1.64      
+jhu_wmti_tort_Corticospinal tract R       float64   541     9         1.64      
+jhu_wmti_tort_Corticospinal tract L       float64   541     9         1.64      
+jhu_wmti_tort_Medial lemniscus R          float64   541     9         1.64      
+jhu_wmti_tort_Medial lemniscus L          float64   541     9         1.64      
+jhu_wmti_tort_Inferior cerebellar peduncle Rfloat64   541     9         1.64      
+jhu_wmti_tort_Inferior cerebellar peduncle Lfloat64   541     9         1.64      
+jhu_wmti_tort_Superior cerebellar peduncle Rfloat64   541     9         1.64      
+jhu_wmti_tort_Superior cerebellar peduncle Lfloat64   541     9         1.64      
+jhu_wmti_tort_Cerebral peduncle R         float64   541     9         1.64      
+jhu_wmti_tort_Cerebral peduncle L         float64   541     9         1.64      
+jhu_wmti_tort_Anterior limb of internal capsule Rfloat64   541     9         1.64      
+jhu_wmti_tort_Anterior limb of internal capsule Lfloat64   541     9         1.64      
+jhu_wmti_tort_Posterior limb of internal capsule Rfloat64   541     9         1.64      
+jhu_wmti_tort_Posterior limb of internal capsule Lfloat64   541     9         1.64      
+jhu_wmti_tort_Retrolenticular internal capsule Rfloat64   541     9         1.64      
+jhu_wmti_tort_Retrolenticular internal capsule Lfloat64   541     9         1.64      
+jhu_wmti_tort_Anterior corona radiata R   float64   541     9         1.64      
+jhu_wmti_tort_Anterior corona radiata L   float64   541     9         1.64      
+jhu_wmti_tort_Superior corona radiata R   float64   541     9         1.64      
+jhu_wmti_tort_Superior corona radiata L   float64   541     9         1.64      
+jhu_wmti_tort_Posterior corona radiata R  float64   541     9         1.64      
+jhu_wmti_tort_Posterior corona radiata L  float64   541     9         1.64      
+jhu_wmti_tort_Posterior thalamic radiation Rfloat64   541     9         1.64      
+jhu_wmti_tort_Posterior thalamic radiation Lfloat64   541     9         1.64      
+jhu_wmti_tort_Sagittal stratum R          float64   541     9         1.64      
+jhu_wmti_tort_Sagittal stratum L          float64   541     9         1.64      
+jhu_wmti_tort_External capsule R          float64   541     9         1.64      
+jhu_wmti_tort_External capsule L          float64   541     9         1.64      
+jhu_wmti_tort_Cingulate cingulum R        float64   541     9         1.64      
+jhu_wmti_tort_Cingulate cingulum L        float64   541     9         1.64      
+jhu_wmti_tort_Hippocampal cingulum R      float64   541     9         1.64      
+jhu_wmti_tort_Hippocampal cingulum L      float64   541     9         1.64      
+jhu_wmti_tort_Fornix crus / stria terminalis Rfloat64   541     9         1.64      
+jhu_wmti_tort_Fornix crus / stria terminalis Lfloat64   541     9         1.64      
+jhu_wmti_tort_Superior longitudinal fasciculus Rfloat64   541     9         1.64      
+jhu_wmti_tort_Superior longitudinal fasciculus Lfloat64   541     9         1.64      
+jhu_wmti_tort_Superior fronto-occipital fasciculus Rfloat64   541     9         1.64      
+jhu_wmti_tort_Superior fronto-occipital fasciculus Lfloat64   541     9         1.64      
+jhu_wmti_tort_Inferior fronto-occipital fasciculus Rfloat64   541     9         1.64      
+jhu_wmti_tort_Inferior fronto-occipital fasciculus Lfloat64   541     9         1.64      
+jhu_wmti_tort_Uncinate fasciculus R       float64   541     9         1.64      
+jhu_wmti_tort_Uncinate fasciculus L       float64   541     9         1.64      
+jhu_wmti_tort_Tapetum R                   float64   541     9         1.64      
+jhu_wmti_tort_Tapetum L                   float64   541     9         1.64      
+jhu_dki_mk_Middle cerebellar peduncle     float64   541     9         1.64      
+jhu_dki_mk_Pontine crossing tract         float64   541     9         1.64      
+jhu_dki_mk_Genu of corpus callosum        float64   541     9         1.64      
+jhu_dki_mk_Body of corpus callosum        float64   541     9         1.64      
+jhu_dki_mk_Splenium of corpus callosum    float64   541     9         1.64      
+jhu_dki_mk_Fornix (body/column)           float64   541     9         1.64      
+jhu_dki_mk_Corticospinal tract R          float64   541     9         1.64      
+jhu_dki_mk_Corticospinal tract L          float64   541     9         1.64      
+jhu_dki_mk_Medial lemniscus R             float64   541     9         1.64      
+jhu_dki_mk_Medial lemniscus L             float64   541     9         1.64      
+jhu_dki_mk_Inferior cerebellar peduncle R float64   541     9         1.64      
+jhu_dki_mk_Inferior cerebellar peduncle L float64   541     9         1.64      
+jhu_dki_mk_Superior cerebellar peduncle R float64   541     9         1.64      
+jhu_dki_mk_Superior cerebellar peduncle L float64   541     9         1.64      
+jhu_dki_mk_Cerebral peduncle R            float64   541     9         1.64      
+jhu_dki_mk_Cerebral peduncle L            float64   541     9         1.64      
+jhu_dki_mk_Anterior limb of internal capsule Rfloat64   541     9         1.64      
+jhu_dki_mk_Anterior limb of internal capsule Lfloat64   541     9         1.64      
+jhu_dki_mk_Posterior limb of internal capsule Rfloat64   541     9         1.64      
+jhu_dki_mk_Posterior limb of internal capsule Lfloat64   541     9         1.64      
+jhu_dki_mk_Retrolenticular internal capsule Rfloat64   541     9         1.64      
+jhu_dki_mk_Retrolenticular internal capsule Lfloat64   541     9         1.64      
+jhu_dki_mk_Anterior corona radiata R      float64   541     9         1.64      
+jhu_dki_mk_Anterior corona radiata L      float64   541     9         1.64      
+jhu_dki_mk_Superior corona radiata R      float64   541     9         1.64      
+jhu_dki_mk_Superior corona radiata L      float64   541     9         1.64      
+jhu_dki_mk_Posterior corona radiata R     float64   541     9         1.64      
+jhu_dki_mk_Posterior corona radiata L     float64   541     9         1.64      
+jhu_dki_mk_Posterior thalamic radiation R float64   541     9         1.64      
+jhu_dki_mk_Posterior thalamic radiation L float64   541     9         1.64      
+jhu_dki_mk_Sagittal stratum R             float64   541     9         1.64      
+jhu_dki_mk_Sagittal stratum L             float64   541     9         1.64      
+jhu_dki_mk_External capsule R             float64   541     9         1.64      
+jhu_dki_mk_External capsule L             float64   541     9         1.64      
+jhu_dki_mk_Cingulate cingulum R           float64   541     9         1.64      
+jhu_dki_mk_Cingulate cingulum L           float64   541     9         1.64      
+jhu_dki_mk_Hippocampal cingulum R         float64   541     9         1.64      
+jhu_dki_mk_Hippocampal cingulum L         float64   541     9         1.64      
+jhu_dki_mk_Fornix crus / stria terminalis Rfloat64   541     9         1.64      
+jhu_dki_mk_Fornix crus / stria terminalis Lfloat64   541     9         1.64      
+jhu_dki_mk_Superior longitudinal fasciculus Rfloat64   541     9         1.64      
+jhu_dki_mk_Superior longitudinal fasciculus Lfloat64   541     9         1.64      
+jhu_dki_mk_Superior fronto-occipital fasciculus Rfloat64   541     9         1.64      
+jhu_dki_mk_Superior fronto-occipital fasciculus Lfloat64   541     9         1.64      
+jhu_dki_mk_Inferior fronto-occipital fasciculus Rfloat64   541     9         1.64      
+jhu_dki_mk_Inferior fronto-occipital fasciculus Lfloat64   541     9         1.64      
+jhu_dki_mk_Uncinate fasciculus R          float64   541     9         1.64      
+jhu_dki_mk_Uncinate fasciculus L          float64   541     9         1.64      
+jhu_dki_mk_Tapetum R                      float64   541     9         1.64      
+jhu_dki_mk_Tapetum L                      float64   541     9         1.64      
+jhu_csf_dc_Middle cerebellar peduncle     float64   550     0         0.00      
+jhu_csf_dc_Pontine crossing tract         float64   550     0         0.00      
+jhu_csf_dc_Genu of corpus callosum        float64   550     0         0.00      
+jhu_csf_dc_Body of corpus callosum        float64   550     0         0.00      
+jhu_csf_dc_Splenium of corpus callosum    float64   550     0         0.00      
+jhu_csf_dc_Fornix (body/column)           float64   550     0         0.00      
+jhu_csf_dc_Corticospinal tract R          float64   550     0         0.00      
+jhu_csf_dc_Corticospinal tract L          float64   550     0         0.00      
+jhu_csf_dc_Medial lemniscus R             float64   550     0         0.00      
+jhu_csf_dc_Medial lemniscus L             float64   550     0         0.00      
+jhu_csf_dc_Inferior cerebellar peduncle R float64   550     0         0.00      
+jhu_csf_dc_Inferior cerebellar peduncle L float64   550     0         0.00      
+jhu_csf_dc_Superior cerebellar peduncle R float64   550     0         0.00      
+jhu_csf_dc_Superior cerebellar peduncle L float64   550     0         0.00      
+jhu_csf_dc_Cerebral peduncle R            float64   550     0         0.00      
+jhu_csf_dc_Cerebral peduncle L            float64   550     0         0.00      
+jhu_csf_dc_Anterior limb of internal capsule Rfloat64   550     0         0.00      
+jhu_csf_dc_Anterior limb of internal capsule Lfloat64   550     0         0.00      
+jhu_csf_dc_Posterior limb of internal capsule Rfloat64   550     0         0.00      
+jhu_csf_dc_Posterior limb of internal capsule Lfloat64   550     0         0.00      
+jhu_csf_dc_Retrolenticular internal capsule Rfloat64   550     0         0.00      
+jhu_csf_dc_Retrolenticular internal capsule Lfloat64   550     0         0.00      
+jhu_csf_dc_Anterior corona radiata R      float64   550     0         0.00      
+jhu_csf_dc_Anterior corona radiata L      float64   550     0         0.00      
+jhu_csf_dc_Superior corona radiata R      float64   550     0         0.00      
+jhu_csf_dc_Superior corona radiata L      float64   550     0         0.00      
+jhu_csf_dc_Posterior corona radiata R     float64   550     0         0.00      
+jhu_csf_dc_Posterior corona radiata L     float64   550     0         0.00      
+jhu_csf_dc_Posterior thalamic radiation R float64   550     0         0.00      
+jhu_csf_dc_Posterior thalamic radiation L float64   550     0         0.00      
+jhu_csf_dc_Sagittal stratum R             float64   550     0         0.00      
+jhu_csf_dc_Sagittal stratum L             float64   550     0         0.00      
+jhu_csf_dc_External capsule R             float64   550     0         0.00      
+jhu_csf_dc_External capsule L             float64   550     0         0.00      
+jhu_csf_dc_Cingulate cingulum R           float64   550     0         0.00      
+jhu_csf_dc_Cingulate cingulum L           float64   550     0         0.00      
+jhu_csf_dc_Hippocampal cingulum R         float64   550     0         0.00      
+jhu_csf_dc_Hippocampal cingulum L         float64   550     0         0.00      
+jhu_csf_dc_Fornix crus / stria terminalis Rfloat64   550     0         0.00      
+jhu_csf_dc_Fornix crus / stria terminalis Lfloat64   550     0         0.00      
+jhu_csf_dc_Superior longitudinal fasciculus Rfloat64   550     0         0.00      
+jhu_csf_dc_Superior longitudinal fasciculus Lfloat64   550     0         0.00      
+jhu_csf_dc_Superior fronto-occipital fasciculus Rfloat64   550     0         0.00      
+jhu_csf_dc_Superior fronto-occipital fasciculus Lfloat64   550     0         0.00      
+jhu_csf_dc_Inferior fronto-occipital fasciculus Rfloat64   550     0         0.00      
+jhu_csf_dc_Inferior fronto-occipital fasciculus Lfloat64   550     0         0.00      
+jhu_csf_dc_Uncinate fasciculus R          float64   550     0         0.00      
+jhu_csf_dc_Uncinate fasciculus L          float64   550     0         0.00      
+jhu_csf_dc_Tapetum R                      float64   550     0         0.00      
+jhu_csf_dc_Tapetum L                      float64   550     0         0.00      
+jhu_wm_dc_Middle cerebellar peduncle      float64   550     0         0.00      
+jhu_wm_dc_Pontine crossing tract          float64   550     0         0.00      
+jhu_wm_dc_Genu of corpus callosum         float64   550     0         0.00      
+jhu_wm_dc_Body of corpus callosum         float64   550     0         0.00      
+jhu_wm_dc_Splenium of corpus callosum     float64   550     0         0.00      
+jhu_wm_dc_Fornix (body/column)            float64   550     0         0.00      
+jhu_wm_dc_Corticospinal tract R           float64   550     0         0.00      
+jhu_wm_dc_Corticospinal tract L           float64   550     0         0.00      
+jhu_wm_dc_Medial lemniscus R              float64   550     0         0.00      
+jhu_wm_dc_Medial lemniscus L              float64   550     0         0.00      
+jhu_wm_dc_Inferior cerebellar peduncle R  float64   550     0         0.00      
+jhu_wm_dc_Inferior cerebellar peduncle L  float64   550     0         0.00      
+jhu_wm_dc_Superior cerebellar peduncle R  float64   550     0         0.00      
+jhu_wm_dc_Superior cerebellar peduncle L  float64   550     0         0.00      
+jhu_wm_dc_Cerebral peduncle R             float64   550     0         0.00      
+jhu_wm_dc_Cerebral peduncle L             float64   550     0         0.00      
+jhu_wm_dc_Anterior limb of internal capsule Rfloat64   550     0         0.00      
+jhu_wm_dc_Anterior limb of internal capsule Lfloat64   550     0         0.00      
+jhu_wm_dc_Posterior limb of internal capsule Rfloat64   550     0         0.00      
+jhu_wm_dc_Posterior limb of internal capsule Lfloat64   550     0         0.00      
+jhu_wm_dc_Retrolenticular internal capsule Rfloat64   550     0         0.00      
+jhu_wm_dc_Retrolenticular internal capsule Lfloat64   550     0         0.00      
+jhu_wm_dc_Anterior corona radiata R       float64   550     0         0.00      
+jhu_wm_dc_Anterior corona radiata L       float64   550     0         0.00      
+jhu_wm_dc_Superior corona radiata R       float64   550     0         0.00      
+jhu_wm_dc_Superior corona radiata L       float64   550     0         0.00      
+jhu_wm_dc_Posterior corona radiata R      float64   550     0         0.00      
+jhu_wm_dc_Posterior corona radiata L      float64   550     0         0.00      
+jhu_wm_dc_Posterior thalamic radiation R  float64   550     0         0.00      
+jhu_wm_dc_Posterior thalamic radiation L  float64   550     0         0.00      
+jhu_wm_dc_Sagittal stratum R              float64   550     0         0.00      
+jhu_wm_dc_Sagittal stratum L              float64   550     0         0.00      
+jhu_wm_dc_External capsule R              float64   550     0         0.00      
+jhu_wm_dc_External capsule L              float64   550     0         0.00      
+jhu_wm_dc_Cingulate cingulum R            float64   550     0         0.00      
+jhu_wm_dc_Cingulate cingulum L            float64   550     0         0.00      
+jhu_wm_dc_Hippocampal cingulum R          float64   550     0         0.00      
+jhu_wm_dc_Hippocampal cingulum L          float64   550     0         0.00      
+jhu_wm_dc_Fornix crus / stria terminalis Rfloat64   550     0         0.00      
+jhu_wm_dc_Fornix crus / stria terminalis Lfloat64   550     0         0.00      
+jhu_wm_dc_Superior longitudinal fasciculus Rfloat64   550     0         0.00      
+jhu_wm_dc_Superior longitudinal fasciculus Lfloat64   550     0         0.00      
+jhu_wm_dc_Superior fronto-occipital fasciculus Rfloat64   550     0         0.00      
+jhu_wm_dc_Superior fronto-occipital fasciculus Lfloat64   550     0         0.00      
+jhu_wm_dc_Inferior fronto-occipital fasciculus Rfloat64   550     0         0.00      
+jhu_wm_dc_Inferior fronto-occipital fasciculus Lfloat64   550     0         0.00      
+jhu_wm_dc_Uncinate fasciculus R           float64   550     0         0.00      
+jhu_wm_dc_Uncinate fasciculus L           float64   550     0         0.00      
+jhu_wm_dc_Tapetum R                       float64   550     0         0.00      
+jhu_wm_dc_Tapetum L                       float64   550     0         0.00      
+eTIV                                      float64   550     0         0.00      
+aseg_summary_BrainSegVol                  float64   550     0         0.00      
+aseg_summary_BrainSegVolNotVent           float64   550     0         0.00      
+aseg_summary_VentricleChoroidVol          float64   550     0         0.00      
+aseg_summary_TotalGrayVol                 float64   550     0         0.00      
+aseg_summary_CerebralWhiteMatterVol       float64   550     0         0.00      
+aseg_Left_Lateral_Ventricle_volume        float64   550     0         0.00      
+aseg_Right_Lateral_Ventricle_volume       float64   550     0         0.00      
+aseg_Left_Inf_Lat_Vent_volume             float64   550     0         0.00      
+aseg_Right_Inf_Lat_Vent_volume            float64   550     0         0.00      
+aseg_3rd_Ventricle_volume                 float64   550     0         0.00      
+--------------------------------------------------------------------------------
+NOTICES, WARNINGS, AND DATA QUALITY ALERTS
+--------------------------------------------------------------------------------
+None. No duplicate ID violations, column collisions, or missing variable issues.
+================================================================================
