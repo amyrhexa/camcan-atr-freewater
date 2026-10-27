@@ -1,0 +1,36 @@
+# Publication Figure Generation (`scripts/`)
+
+This directory contains `generate_publication_figures.py`, which reads the statistical output CSV tables in `results/tables/` and generates all 12 vector figures (`PDF` and `SVG`) appearing in **"Microstructural Drivers of Lifespan Fluid Intelligence"**.
+
+---
+
+## Execution
+
+From the repository root:
+
+```bash
+python3 scripts/generate_publication_figures.py
+```
+
+All figures are written deterministically to `results/figures/` in both print-ready vector PDF (`.pdf`) and scalable web vector (`.svg`) formats.
+
+---
+
+## Repository Filename to Manuscript Figure Mapping
+
+Note that the repository filenames (`fig01`–`fig12`) are numbered by analytical module, whereas the manuscript orders them sequentially as **Figures 1–12** following the text narrative (Methods $\rightarrow$ Tier 1 CFA $\rightarrow$ Global Fit $\rightarrow$ Hierarchy Inversion $\rightarrow$ Tier 2 $\rightarrow$ Tier 3 $\rightarrow$ Variance Funneling):
+
+| Manuscript Figure | Repository Filename (`results/figures/`)      | Manuscript Section & Content Summary                                                                                                                                                                                                                                         | Primary Source Table(s) (`results/tables/`)                                                                  |
+| :---------------- | :-------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------- |
+| **Figure 1**      | `fig11_cohort_attrition_flowchart.{pdf,svg}`  | **Section 2.1**: CONSORT-style cohort derivation and multi-modality harmonization flowchart ($N = 653 \rightarrow 550 \rightarrow 547 \rightarrow 513$) and Wilcoxon attrition age audit.                                                                                    | `preprocessing_summary.csv`, `excluded_vs_retained_age.csv`                                                  |
+| **Figure 2**      | `fig12_outlier_4sd_range_profile.{pdf,svg}`   | **Section 3.1**: Pre-filter standardized $z$-score range profile ($N = 547$; $n = 538$ complete cases for $\text{FA}_{\text{tissue}}$) across the 20 manifest variables relative to the $\pm 4.0\text{ SD}$ threshold.                                                       | `camcan_watershed_dataset.csv`, `excluded_participants_profile.csv`                                          |
+| **Figure 3**      | `fig02_fi_measurement_cfa.{pdf,svg}`          | **Section 3.2**: Tier 1 reflective Fluid Intelligence (FI) confirmatory factor model standardized loadings ($\lambda \pm 95\%\text{ CI}$, $N = 513$, $df = 2$).                                                                                                              | `cfa_fi_fit.csv`, `standardized_solutions_all_models.csv`                                                    |
+| **Figure 4**      | `fig04_modality_cfi_tli.{pdf,svg}`            | **Section 3.3**: Global incremental fit comparison ($\text{CFI}_{\text{robust}}$ and $\text{TLI}_{\text{robust}}$) across Models B, D, A, and C ($N = 513$, $df = 60$).                                                                                                      | `watershed_model_comparison.csv`                                                                             |
+| **Figure 5**      | `fig05_modality_rmsea_ci.{pdf,svg}`           | **Section 3.3**: Approximation and residual error ($\text{RMSEA}_{\text{robust}} \pm 90\%\text{ CI}$ and $\text{SRMR}$) across Models B, D, A, and C relative to the $0.05$ close-fit threshold.                                                                             | `watershed_model_comparison.csv`                                                                             |
+| **Figure 6**      | `fig06_inversion_fit_degradation.{pdf,svg}`   | **Section 3.4**: Fit degradation ($\text{CFI}_{\text{robust}}, \text{RMSEA}_{\text{robust}}, \text{SRMR}$) under inverted mediator ordering ($\text{PS} \rightarrow \text{WM} \rightarrow \text{FI}$, $df = 56$) vs. forward watershed ($df = 60$).                          | `directionality_model_comparison.csv`                                                                        |
+| **Figure 7**      | `fig07_inversion_delta_aic.{pdf,svg}`         | **Section 3.4**: Joint likelihood $\Delta\text{AIC}$ penalties ($\Delta\text{AIC} = +160.26$ in Model B; $+118.48$ in Model A; $\Delta\text{AIC} = 0.00$ for Markov-equivalent reversed lower block).                                                                        | `directionality_model_comparison.csv`, `mediation_and_equivalence_tests.csv`                                 |
+| **Figure 8**      | `fig01_watershed_path_diagram.{pdf,svg}`      | **Section 3.5**: Empirical three-tier watershed SEM architecture diagram for Model B ($\text{FA}_{\text{tissue}}$, $N = 513$, $df = 60$, $R^2_{\text{FI}} = 57.8\%$).                                                                                                        | `standardized_solutions_all_models.csv`, `rsquared_unadjusted.csv`                                           |
+| **Figure 9**      | `fig03_speed_to_fi_forest.{pdf,svg}`          | **Section 3.5**: Tier 2 standardized path coefficients ($\beta \pm 95\%\text{ CI}$) from the 6 processing speed primitives to latent FI ($R^2 = 57.77\%$).                                                                                                                   | `standardized_solutions_all_models.csv`                                                                      |
+| **Figure 10**     | `fig08_tract_speed_beta_matrix.{pdf,svg}`     | **Section 3.6**: Upstream Tier 3 functional specificity heatmap of standardized weights ($\beta$) from the 10 $\text{FA}_{\text{tissue}}$ tracts to the 6 speed primitives in Model B.                                                                                       | `tract_to_speed_paths_unadjusted.csv`                                                                        |
+| **Figure 11**     | `fig09_anterior_system_specificity.{pdf,svg}` | **Section 3.6**: Direct comparison of standardized path coefficients ($\beta \pm 95\%\text{ CI}$) between $\text{ATR}$ and $\text{FMin}$ across Model A (conventional $\text{FA}$) and Model B ($\text{FA}_{\text{tissue}}$) with $B = 5{,}000$ bootstrap shift annotations. | `tract_to_speed_paths_unadjusted.csv`, `wald_ATR_vs_FMin_unadjusted.csv`, `bootstrap_ATR_FMin_contrasts.csv` |
+| **Figure 12**     | `fig10_variance_funneling_r2.{pdf,svg}`       | **Section 3.7**: Progressive structural variance funneling ($R^2\%$) across the watershed hierarchy in unadjusted lifespan Model B vs. $\text{age} + \text{age}^2 + \text{sex} + \text{ventricle/eTIV}$ adjusted Model B.                                                    | `rsquared_unadjusted.csv`, `rsquared_adjusted.csv`                                                           |

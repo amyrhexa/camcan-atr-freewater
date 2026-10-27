@@ -1,0 +1,3 @@
+"model","test","chisq_diff","df_diff","p","logLik_forward_minus_reversed","df_forward","df_reversed","delta_aic_inverted_vs_forward"
+"Model_A","forward vs forward+10 direct WM->FI (scaled LRT)",45.29,10,1.927e-06,2.176e-09,60,60,118.48
+"Model_B","forward vs forward+10 direct WM->FI (scaled LRT)",39.853,10,1.798e-05,5.712e-10,60,60,160.26
